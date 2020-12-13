@@ -8,19 +8,17 @@ var medicationsSchema = new Schema(
   {
     nama_obat: {
       type: String,
-      required: true
     },
     dosis: {
         type: Number,
-        required: true
+  
     },
     satuan: {
         type: String,
-        required: true
+  
     },
     tujuan: {
         type: String,
-        required: true,
         default: ""
     }
   }
