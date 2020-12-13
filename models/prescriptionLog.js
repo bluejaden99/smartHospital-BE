@@ -1,15 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-require("mongoose-currency").loadType(mongoose);
-var Currency = mongoose.Types.Currency;
+// require("mongoose-currency").loadType(mongoose);
+// var Currency = mongoose.Types.Currency;
 
 var medicationsSchema = new Schema(
   {
     nama_obat: {
       type: String,
-      min: 1,
-      max: 5,
       required: true
     },
     dosis: {
@@ -30,18 +28,20 @@ var medicationsSchema = new Schema(
 
 var logSchema = new Schema(
   {
+    idLog:{
+      type:mongoose.Schema.ObjectId,
+      default:mongoose.Schema.ObjectId
+    },
     idPasien: {
       type: String,
       required: true,
-      unique: true,
     },
     idDoctor: {
       type: String,
       required: true,
     },
-    tanggal: {
+    tanggal_pengisian: {
       type: Date,
-      required: true,
       default: Date.now()
     },
     keterangan: {
@@ -53,9 +53,11 @@ var logSchema = new Schema(
   },
   {
     timestamps: true,
+    createdAt: 'created_at',
+    updatedAt: 'updated_at'
   }
 );
 
-var Dishes = mongoose.model("Log", logSchema);
-var Comments = mongoose.model("Medication", medicationsSchema);
-module.exports = { Dishes, Comments };
+var log = mongoose.model("Log", logSchema);
+var medications = mongoose.model("Medication", medicationsSchema);
+module.exports = { log, medications };
