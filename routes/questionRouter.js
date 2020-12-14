@@ -11,9 +11,14 @@ questionRouter.use(bodyParser.json());
 questionRouter.route('/')
   .get((req, res, next)=>{
     QuestionList.find().then((questionList)=>{
+      try {
       res.status = 200;
       res.setHeader('Content-type', 'application/json');
       res.json(questionList);
+      }
+      catch (err) {
+        next(err);
+      }
     })
   })
   .post((req, res, next)=>{
