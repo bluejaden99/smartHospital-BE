@@ -11,4 +11,5 @@ newsapi.v2.everything({
     page: 1
   }).then(response => {
     console.log(response);
+    exports.news_json = response;
   });
