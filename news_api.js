@@ -10,6 +10,6 @@ newsapi.v2.everything({
     sortBy: 'recent',
     page: 1
   }).then(response => {
-    console.log(response);
+    console.log(response.articles);
     exports.news_json = response;
   });

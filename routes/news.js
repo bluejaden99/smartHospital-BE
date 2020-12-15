@@ -4,7 +4,7 @@ var news = require('./news_api.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    const news = await BlogPost.findById(req.params.id).populate('userid');
+    const news = await news.articles;
     console.log(news);
     res.render('news', {news});
 });

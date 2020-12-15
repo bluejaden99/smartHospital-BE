@@ -4,7 +4,7 @@ html
     title= "Berita Kesehatan"
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    <% for (var i = 0; i < news.length; i++) { %>
-    h2= <%= news[i].title %>
-    h3= <%= news[i].description: %>
     block content
+    <% for (var i = 0; i < news.length; i++) { %>
+    h1= <%= news[i].title %>
+    p <%= news[i].description: %>
