@@ -5,9 +5,15 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
+var passport = require("passport"), 
+    bodyParser = require("body-parser"), 
+    LocalStrategy = require("passport-local"), 
+    passportLocalMongoose =  
+        require("passport-local-mongoose"), 
+    User = require("./models/User"); 
 
+var UsersRouter = require('./routes/users');
 var questionRouter = require('./routes/questionRouter');
-
 var app = express();
 
 //url mongodbserver
@@ -31,6 +37,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/question', questionRouter);
+app.use('/users', UsersRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
