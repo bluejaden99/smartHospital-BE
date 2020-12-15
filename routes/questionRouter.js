@@ -12,9 +12,9 @@ questionRouter.route('/')
   .get((req, res, next)=>{
     QuestionList.find().then((questionList)=>{
       try{
-      res.status = 200;
-      res.setHeader('Content-type', 'application/json');
-      res.json(questionList);
+        res.status = 200;
+        res.setHeader('Content-type', 'application/json');
+        res.json(questionList);
       }
       catch (err) {
         res.status = 500;
@@ -23,19 +23,32 @@ questionRouter.route('/')
     })
   })
   .post((req, res, next)=>{
-    QuestionList.create(req.body).then((questionList)=>{
+    QuestionList.create(req.body)
+      .then((questionList)=>{
       console.log("insert berhasil")
-      res.status = 200;
-      res.setHeader('Content-type', 'application/json');
-      res.json(questionList);
+      try{
+        res.status = 200;
+        res.setHeader('Content-type', 'application/json');
+        res.json(questionList);
+      }
+      catch (err) {
+        res.status = 500;
+        next(err);
+      }
     })
   })
   .delete((req, res, next) => {
     QuestionList.remove({})
       .then((questionList) => {
-        res.status = 200;
-        res.setHeader('Content-type', 'application/json');
-        res.json(questionList);
+        try{
+          res.status = 200;
+          res.setHeader('Content-type', 'application/json');
+          res.json(questionList);
+        }
+        catch (err) {
+          res.status = 500;
+          next(err);
+        }
       });
   });
 
