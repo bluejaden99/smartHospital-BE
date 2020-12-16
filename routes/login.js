@@ -26,9 +26,8 @@ loginRouter.route('/login')
   .post((req, res, next) => {
     Users.findOne({email : req.body.email})
     .then((users) => {
-        //console.log("REGISTER BERHASIL", users);
         try{
-          if(bcrypt.compareSync( req.body.password, users.password)){
+          if(req.body.password.localeCompare(users.password)===0){
             const token = jwt.sign({ sub: users.id }, "huahuahua", { expiresIn: '7d' });
             res.status = 200; //respon
             res.setHeader('Content-type', 'application/json');

@@ -5,15 +5,14 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
-var passport = require("passport"), 
-    bodyParser = require("body-parser"), 
-    LocalStrategy = require("passport-local"), 
-    passportLocalMongoose =  
-        require("passport-local-mongoose"), 
-    User = require("./models/User"); 
 
 var UsersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
+
+var rapidTestRouter = require ('./routes/rapidTestRouter');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var newsRouter = require('./routes/news');
 var questionRouter = require('./routes/questionRouter');
 var app = express();
 
@@ -22,7 +21,7 @@ var url = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@clu
 var connect = mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
 
 connect.then((db)=>{
-  console.log('berhasil');
+  console.log('Success');
 }, (err)=>{
   console.log(err);
 })
@@ -37,6 +36,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/rapidtest', rapidTestRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/news', newsRouter);
 app.use('/question', questionRouter);
 app.use('/users', UsersRouter);
 app.use('/', loginRouter)
