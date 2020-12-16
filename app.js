@@ -14,6 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/news');
 var questionRouter = require('./routes/questionRouter');
+var hospitalRouter = require('./routes/hospitalRouter');
 var app = express();
 
 //url mongodbserver
@@ -41,8 +42,9 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/news', newsRouter);
 app.use('/question', questionRouter);
+app.use('/hospital', hospitalRouter);
 app.use('/users', UsersRouter);
-app.use('/', loginRouter)
+app.use('/login', loginRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
