@@ -6,8 +6,8 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
 
+var rapidTestRouter = require ('./routes/rapidTestRouter');
 var questionRouter = require('./routes/questionRouter');
-
 var app = express();
 
 //url mongodbserver
@@ -15,7 +15,7 @@ var url = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@clu
 var connect = mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
 
 connect.then((db)=>{
-  console.log('berhasil');
+  console.log('Success');
 }, (err)=>{
   console.log(err);
 })
@@ -30,6 +30,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/rapidtest', rapidTestRouter);
 app.use('/question', questionRouter);
 
 // catch 404 and forward to error handler
