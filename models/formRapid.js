@@ -7,18 +7,20 @@ const Schema = mongoose.Schema;
 var rapidtestSchema = new Schema(
   {
     bookingDate: {
-      type: Number,
+        type: Date,
+        default: Date.now()
     },
     name: {
         type: String,
- 
+        required: true,
     },
     nik: {
         type: Number,
- 
+        required: true,
     },
     email: {
         type: String,
+        required: true,
     }
   },
   {
@@ -26,6 +28,5 @@ var rapidtestSchema = new Schema(
   }
 );
  
-
 var rapidtest = mongoose.model("Rapidtest", rapidtestSchema);
 module.exports = rapidtest;
