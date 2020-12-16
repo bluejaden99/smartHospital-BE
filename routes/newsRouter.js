@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
-var news = require('./scripts/news_api.js');
+var news = require('./scripts/news_api');
 
-/* GET news page. */
-router.get('/', function(req, res, next) {
+/* GET home page. */
+router.get('/', async function(req, res, next) {
     const news = await news.articles;
     console.log(news);
     res.render('news', {news});
