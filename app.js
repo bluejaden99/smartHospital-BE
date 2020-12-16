@@ -6,6 +6,9 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
 
+var UsersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
+
 var rapidTestRouter = require ('./routes/rapidTestRouter');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -38,6 +41,8 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/news', newsRouter);
 app.use('/question', questionRouter);
+app.use('/users', UsersRouter);
+app.use('/', loginRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
