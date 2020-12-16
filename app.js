@@ -7,6 +7,9 @@ var mongoose = require('mongoose')
 var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
 
 var rapidTestRouter = require ('./routes/rapidTestRouter');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var newsRouter = require('./routes/news');
 var questionRouter = require('./routes/questionRouter');
 var app = express();
 
@@ -31,6 +34,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/rapidtest', rapidTestRouter);
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/news', newsRouter);
 app.use('/question', questionRouter);
 
 // catch 404 and forward to error handler
