@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var news = require('./news_api.js');
+var news = require('./scripts/news_api.js');
 
-/* GET home page. */
+/* GET news page. */
 router.get('/', function(req, res, next) {
     const news = await news.articles;
     console.log(news);
