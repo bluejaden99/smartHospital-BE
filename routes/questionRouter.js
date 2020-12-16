@@ -37,8 +37,19 @@ questionRouter.route('/')
     })
   })
   .put((req, res, next) => {
-    res.statusCode = 403;
-    res.end('Tidak support untuk fungsionalitas ini');
+    QuestionList.findOneAndUpdate({}, {
+      $set: req.body 
+    }, { new: true })
+      .then((question) => {
+        if (question != null) {
+          res.status = 200;
+          res.setHeader('Content-type', 'application/json');
+          res.json(question);
+        } else {
+          res.status = 404;
+          res.end('List pertanyaan tidak ada');
+        }
+      });
   })
   .delete((req, res, next) => {
     QuestionList.remove({})
@@ -55,61 +66,15 @@ questionRouter.route('/')
       });
   });
 
-questionRouter.route('/:questionListId')
+  questionRouter.route('/:questionId')
   .get((req, res, next) => {
-    QuestionList.findById(req.params.questionListId)
+    var questionId = parseInt(req.params.questionId, 10)
+    QuestionList.findOne({'questionList.id' : questionId})
       .then((question) => {
         if (question != null) {
           res.status = 200;
           res.setHeader('Content-type', 'application/json');
-          res.json(question);
-        } else {
-          res.status = 404;
-          res.end('List pertanyaan tidak ada');
-        }
-      });
-  })
-  .post((req, res, next) => {
-    res.statusCode = 403;
-    res.end('Tidak support untuk fungsionalitas ini');
-  })
-  .put((req, res, next) => {
-    QuestionList.findOneAndUpdate(req.params.questionListId, {
-      $set: req.body 
-    }, { new: true })
-      .then((question) => {
-        if (question != null) {
-          res.status = 200;
-          res.setHeader('Content-type', 'application/json');
-          res.json(question);
-        } else {
-          res.status = 404;
-          res.end('List pertanyaan tidak ada');
-        }
-      });
-  })
-  .delete((req, res, next) => {
-    QuestionList.findByIdAndRemove(req.params.questionListId)
-      .then((question) => {
-        if (question != null) {
-          res.status = 200;
-          res.setHeader('Content-type', 'application/json');
-          res.end('Berhasil menghapus list pertanyaan');
-        } else {
-          res.status = 404;
-          res.end('List pertanyaan tidak ada');
-        }
-      });
-  })
-
-  questionRouter.route('/:questionListId/:questionId')
-  .get((req, res, next) => {
-    QuestionList.findOne({"_id" : req.params.questionListId, "questionList._id" : req.params.questionId}, { 'questionList.$': 1 })
-      .then((question) => {
-        if (question != null) {
-          res.status = 200;
-          res.setHeader('Content-type', 'application/json');
-          res.json(question);
+          res.json(question.questionList[0]);
         } else {
           res.status = 404;
           res.end('Pertanyaan tidak ada');
@@ -121,8 +86,8 @@ questionRouter.route('/:questionListId')
     res.end('Tidak support untuk fungsionalitas ini');
   })
   .put((req, res, next) => {
-    console.log(req.body.question)
-    QuestionList.findOneAndUpdate({"_id" : req.params.questionListId, "questionList._id" : req.params.questionId}, {
+    var questionId = parseInt(req.params.questionId, 10)
+    QuestionList.findOneAndUpdate({'questionList.id' : questionId}, {
       '$set': {
         'questionList.$.question': req.body.question,
     }
@@ -139,7 +104,8 @@ questionRouter.route('/:questionListId')
       });
   })
   .delete((req, res, next) => {
-    QuestionList.findOneAndRemove({"_id" : req.params.questionListId, "questionList._id" : req.params.questionId})
+    var questionId = parseInt(req.params.questionId, 10)
+    QuestionList.findOneAndRemove({'questionList.id' : questionId})
       .then((question) => {
         if (question != null) {
           res.status = 200;
