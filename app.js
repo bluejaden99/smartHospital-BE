@@ -13,6 +13,7 @@ var passport = require("passport"),
     User = require("./models/User"); 
 
 var UsersRouter = require('./routes/users');
+var loginRouter = require('./routes/login');
 var questionRouter = require('./routes/questionRouter');
 var app = express();
 
@@ -38,6 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/question', questionRouter);
 app.use('/users', UsersRouter);
+app.use('/', loginRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
