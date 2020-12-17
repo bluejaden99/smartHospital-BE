@@ -125,7 +125,7 @@ docRouter.route('/nama/:docNama')
 //filter by name
 docRouter.route('/filter/nama/:docNama')
     .get((req,res,next) => {
-    Dokter.find({nama : req.params.docNama})
+    Dokter.find({nama : {$regex : req.params.docNama}})
         .then((docs) => {
             res.status = 200;
             res.setHeader('Content-type', 'application/json');
@@ -136,7 +136,7 @@ docRouter.route('/filter/nama/:docNama')
 //filter by jenis
 docRouter.route('/filter/jenis/:docJenisDokter')
     .get((req,res,next) => {
-        Dokter.find({jenisDokter : req.params.docJenisDokter})
+        Dokter.find({jenisDokter : {$regex : req.params.docJenisDokter}})
         .then((docs) => {
             res.status = 200;
             res.setHeader('Content-type', 'application/json');
