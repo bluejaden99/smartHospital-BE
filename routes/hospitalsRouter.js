@@ -47,7 +47,7 @@ hospitalRouter.route('/data')
     })
   })
   .put((req, res, next) => {
-    hospitals.findOneAndUpdate({name = req.params.hospital_name}, {
+    hospitals.findOneAndUpdate({name: req.params.hospital_name}, {
       $set: req.body 
     }, { new: true })
       .then((hospital) => {
@@ -76,4 +76,4 @@ hospitalRouter.route('/data')
       });
   });
 
-module.exports = router;
+module.exports = hospitalRouter;

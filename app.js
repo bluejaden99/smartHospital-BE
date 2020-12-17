@@ -12,9 +12,10 @@ var loginRouter = require('./routes/login');
 var rapidTestRouter = require ('./routes/rapidTestRouter');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var newsRouter = require('./routes/news');
+var newsRouter = require('./routes/newsRouter');
 var questionRouter = require('./routes/questionRouter');
-var hospitalRouter = require('./routes/hospitalRouter');
+var hospitalRouter = require('./routes/hospitalsRouter');
+
 var app = express();
 
 //url mongodbserver
@@ -37,8 +38,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/rapidtest', rapidTestRouter);
 app.use('/', indexRouter);
+app.use('/rapidtest', rapidTestRouter);
 app.use('/users', usersRouter);
 app.use('/news', newsRouter);
 app.use('/question', questionRouter);
