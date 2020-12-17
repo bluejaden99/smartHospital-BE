@@ -8,11 +8,13 @@ const hospitals = require('../models/hospitals');
 /* rute ke rumah sakit*/
 hospitalRouter.get('/route', function(req, res, next) {
 
-    var query = encodeURI("req.params.hospital_name");
+    var query = encodeURI(req.query.destinasi);
+    console.log(query);
     var destination = `https://www.google.com/maps/dir/?api=1&destination=${query}`;
+    console.log(destination);
 
+    res.send(`Opening ${destination}`);
     open(destination, function (err) {
-        res.send(`Opening ${destination}`);
         if ( err ) throw err;    
     });
 });
