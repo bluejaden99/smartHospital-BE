@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const hospitals = require('../models/hospitals');
 
+hospitalRouter.use(bodyParser.json());
+
 /* rute ke rumah sakit*/
 hospitalRouter.get('/route', function(req, res, next) {
 
@@ -22,11 +24,11 @@ hospitalRouter.get('/route', function(req, res, next) {
 /* pengolahan data rumah sakit */
 hospitalRouter.route('/data')
   .get((req, res, next)=>{
-    hospitals.find({nama: req.params.hospital_name}).then((hospital)=>{
+    hospitals.find({}).then((hospital)=>{
       try{
         res.status = 200;
         res.setHeader('Content-type', 'application/json');
-        res.json(hospital);
+        res.send(hospital);
       }
       catch (err) {
         res.status = 404;
