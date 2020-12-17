@@ -14,7 +14,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/newsRouter');
 var questionRouter = require('./routes/questionRouter');
-var hospitalRouter = require('./routes/hospitalsRouter');
+var hospitalsRouter = require('./routes/hospitalsRouter');
 
 var app = express();
 
@@ -43,7 +43,7 @@ app.use('/rapidtest', rapidTestRouter);
 app.use('/users', usersRouter);
 app.use('/news', newsRouter);
 app.use('/question', questionRouter);
-app.use('/hospital', hospitalRouter);
+app.use('/hospital', hospitalsRouter);
 app.use('/users', UsersRouter);
 app.use('/login', loginRouter)
 

@@ -3,23 +3,23 @@ const Schema = mongoose.Schema;
 
 var hospitalSchema = new Schema(
   {
-    nama: {
+    name: {
       type: String,
       required: true,
     },
-    alamat: {
+    address: {
       type: String,
       required: true,
     },
-    kota: {
+    region: {
       type: String,
       required: true,
     },
-    telepon: {
+    phone: {
       type: Number,
       required: true,
     },
-    provinsi: {
+    province: {
       type: String,
       required: true,
     },
