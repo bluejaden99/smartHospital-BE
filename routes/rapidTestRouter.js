@@ -10,18 +10,26 @@ rapidTestRouter.use(bodyParser.json());
 rapidTestRouter.route('/')
   .get((req, res, next)=>{
     FormRapid.find().then((formRapid)=>{
+        try{
         res.status = 200;
         res.setHeader('Content-type', 'application/json');
-        res.json(formRapid);
+        res.json(formRapid); }
+        catch (err) {
+          res.status = 500;
+          next(err); }
     });
   })
 
   .post((req, res, next)=>{
     FormRapid.create(req.body).then((formRapid)=>{
     console.log("Insert Success")
+      try{
       res.status = 200;
       res.setHeader('Content-type', 'application/json');
-      res.json(formRapid);
+      res.json(formRapid); }
+      catch (err) {
+      res.status = 500;
+      next(err); }
     });
   })
 
@@ -29,18 +37,28 @@ rapidTestRouter.route('/')
     FormRapid.findByIdAndUpdate({}, {
       $set: req.body
     }, {new: true}).then ((rapid)=> {
+      if (rapid != null) {
       res.status = 200;
       res.setHeader('Content-type', 'application/json');
-      res.json(rapid);
+      res.json(rapid); }
+      else {
+      res.status = 404;
+      res.end('Something Happend');
+      }
   });
 })
 
   .delete((req, res, next) => {
     FormRapid.remove({})
     .then((rapid) => {
+        try{
         res.status = 200;
         res.setHeader('Content-type', 'application/json');
-        res.json(rapid);
+        res.json(rapid); }
+        catch (err) {
+        res.status = 500;
+        next(err);
+        }
       });
   });
 
@@ -49,9 +67,14 @@ rapidTestRouter.route('/:rapidId')
     console.log(req.params.dishId);
     FormRapid.findById(req.params.rapidId)
     .then((rapid) => {
+        if (rapid !=null) {
         res.status = 200;
         res.setHeader('Content-type', 'application/json');
-        res.json(rapid);
+        res.json(rapid); }
+        else {
+        res.status = 404;
+        res.end ('Something Happend');
+        }
     });
 })
   
@@ -65,18 +88,28 @@ rapidTestRouter.route('/:rapidId')
     $set: req.body
   }, { new: true })
     .then((rapid) => {
+      if (rapid != null) {
       res.status = 200;
       res.setHeader('Content-type', 'application/json');
-      res.json(rapid);
+      res.json(rapid); }
+      else {
+      res.status = 404;
+      res.end ('Something Happend');
+      }
     });
 })
 
   .delete((req, res, next) => {
     FormRapid.findByIdAndRemove(req.params.rapidId)
-      .then(() => {
+      .then((rapid) => {
+        if (rapid != null) {
         res.status = 200;
         res.setHeader('Content-type', 'application/json');
-        res.end ('Remove Success');
+        res.end ('Remove Success'); }
+        else {
+        res.status = 404;
+        res.end ('Something Happend');
+        }
     });
 });
 
