@@ -6,15 +6,20 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.13",
+    "bcrypt": "^5.0.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
-    "http-errors": "~1.6.3",
+    "http-error": "0.0.6",
+    "http-errors": "^1.6.3",
     "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.7",
     "mongoose-currency": "^0.2.0",
     "morgan": "~1.9.1",
-    "newsapi": "^2.4.1"
+    "newsapi": "^2.4.1",
+    "open": "^7.3.0"
   }
 }
