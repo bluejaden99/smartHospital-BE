@@ -8,6 +8,22 @@ const questionRouter = express.Router();
 
 questionRouter.use(bodyParser.json());
 
+const cek_covid = require( '../service/cek-covid')
+
+questionRouter.route('/result')
+  .post((req, res, next) => {
+    let result = cek_covid(req.body.data)
+    if(result != null){
+      res.status = 200;
+      res.setHeader('Content-type', 'application/json');
+      res.json(result);
+    }
+    else{
+      res.status = 404;
+      res.end("Error")
+    }
+})
+
 questionRouter.route('/')
   .get((req, res, next)=>{
     QuestionList.findOne({},{_id:0}).then((questionList)=>{
@@ -66,7 +82,7 @@ questionRouter.route('/')
       });
   });
 
-  questionRouter.route('/:questionId')
+questionRouter.route('/:questionId')
   .get((req, res, next) => {
     var questionId = parseInt(req.params.questionId, 10)
     QuestionList.findOne({'questionList.id' : questionId})
