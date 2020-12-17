@@ -12,7 +12,7 @@ newsapi.v2
     page: 1,
   })
   .then((response) => {
-    console.log(response.articles);
+    console.log(response);
     if ((response = [])) {
       exports.news_json = response;
     } else {
