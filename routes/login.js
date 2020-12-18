@@ -28,7 +28,7 @@ loginRouter.route('/login')
     Users.findOne({email : req.body.email})
     .then((users) => {
         try{
-          if(req.body.password.localCompare(users.password)===0){
+          if(req.body.password===users.password){
             const token = jwt.sign({ sub: users.id }, "huahuahua", { expiresIn: '7d' });
             res.status = 200; //respon
             res.setHeader('Content-type', 'application/json');
