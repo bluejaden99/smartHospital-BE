@@ -6,6 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
 var cors = require('cors')
+var bodyParser = require('body-parser');
 
 var UsersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
@@ -38,6 +39,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/rapidtest', rapidTestRouter);
 app.use('/users', usersRouter);
