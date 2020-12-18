@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+var schema = mongoose.Schema;
 
-var hospitalSchema = new Schema(
+var hospitalSchema = new schema(
   {
     name: {
       type: String,
@@ -16,18 +16,15 @@ var hospitalSchema = new Schema(
       required: true,
     },
     phone: {
-      type: Number,
+      type: String,
       required: true,
     },
     province: {
       type: String,
       required: true,
     },
-  },
-  {
-    versionKey: false,
   }
 );
 
-var hospital = mongoose.model("Hospitals", hospitalSchema);
+var hospital = mongoose.model("hospitals", hospitalSchema);
 module.exports = hospital;
