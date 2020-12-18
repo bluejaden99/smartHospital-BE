@@ -24,6 +24,7 @@ loginRouter.route('/register')
 
 loginRouter.route('/login')
   .post((req, res, next) => {
+    console.log(req.body)
     Users.findOne({email : req.body.email})
     .then((users) => {
       console.log(req.body, users)
