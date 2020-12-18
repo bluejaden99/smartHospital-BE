@@ -34,18 +34,8 @@ rapidTestRouter.route('/')
   })
 
   .put((req, res, next) => {
-    FormRapid.findByIdAndUpdate({}, {
-      $set: req.body
-    }, {new: true}).then ((rapid)=> {
-      if (rapid != null) {
-      res.status = 200;
-      res.setHeader('Content-type', 'application/json');
-      res.json(rapid); }
-      else {
-      res.status = 404;
-      res.end('Something Happend');
-      }
-  });
+    res.status = 403; //respon not supported
+    res.end('Not Supported by the time')
 })
 
   .delete((req, res, next) => {

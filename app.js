@@ -8,9 +8,7 @@ var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
 
 var UsersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
-
 var rapidTestRouter = require ('./routes/rapidTestRouter');
-var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var newsRouter = require('./routes/newsRouter');
 var questionRouter = require('./routes/questionRouter');
@@ -39,14 +37,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
 app.use('/rapidtest', rapidTestRouter);
 app.use('/users', usersRouter);
 app.use('/news', newsRouter);
 app.use('/question', questionRouter);
 app.use('/hospital', hospitalsRouter);
 app.use('/users', UsersRouter);
-app.use('/login', loginRouter);
+app.use('/', loginRouter);
 app.use('/dokter', docRouter);
 
 // catch 404 and forward to error handler
