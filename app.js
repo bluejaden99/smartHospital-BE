@@ -43,7 +43,7 @@ app.use('/news', newsRouter);
 app.use('/question', questionRouter);
 app.use('/hospital', hospitalsRouter);
 app.use('/users', UsersRouter);
-app.use('/', loginRouter);
+app.use('/login', loginRouter);
 app.use('/dokter', docRouter);
 
 // catch 404 and forward to error handler
