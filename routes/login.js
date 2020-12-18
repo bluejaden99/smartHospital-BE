@@ -31,6 +31,11 @@ loginRouter.route('/login')
             const token = jwt.sign({ sub: users.id }, "huahuahua", { expiresIn: '7d' });
             res.status = 200; //respon
             res.setHeader('Content-type', 'application/json');
+            let result = {
+              "username" : users.username,
+              "jenis kelamin" : users.jenis_kelamin,
+              "token" : users.token
+            }
             res.json(token);
           }
           else{

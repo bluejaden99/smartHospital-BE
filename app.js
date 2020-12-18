@@ -48,7 +48,7 @@ app.use('/dokter', docRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.header('Access-COntrol-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Origin', '*')
   next(createError(404));
 });
 
