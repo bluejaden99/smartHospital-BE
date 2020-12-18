@@ -20,9 +20,16 @@ var usersSchema = new Schema(
     alamat : {
         type: String,
         
-        
+    
     },
     password : {
+    type: String,
+    
+  },jenis_kelamin : {
+    type: String,
+    
+  },
+  username : {
     type: String,
     
   }

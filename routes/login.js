@@ -26,20 +26,21 @@ loginRouter.route('/login')
   .post((req, res, next) => {
     Users.findOne({email : req.body.email})
     .then((users) => {
+      console.log(req.body, users)
         try{
-          if(req.body.password.localeCompare(users.password)===0){
+          if(req.body.password===users.password){
             const token = jwt.sign({ sub: users.id }, "huahuahua", { expiresIn: '7d' });
             res.status = 200; //respon
             res.setHeader('Content-type', 'application/json');
             let result = {
               "username" : users.username,
               "jenis kelamin" : users.jenis_kelamin,
-              "token" : users.token
+              "token" : token
             }
-            res.json(token);
+            res.json(result);
           }
           else{
-            res.status = 400; //respon
+            res.status = 403; //respon
             res.setHeader('Content-type', 'application/json');
             res.end("Email atau password salah");
           }
@@ -47,7 +48,7 @@ loginRouter.route('/login')
         catch(e){
           next(e)
         }
-    });
+    })
   })
 
 module.exports = loginRouter 
