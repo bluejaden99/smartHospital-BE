@@ -14,7 +14,7 @@ loginRouter.route('/register')
   .post((req, res, next) => {
     Users.create(req.body)
     .then((users) => {
-      console.log("RESGITER BERHASIL", users);
+      console.log("REGISTER BERHASIL", users);
 
         res.status = 200; //respon
         res.setHeader('Content-type', 'application/json');
@@ -22,29 +22,34 @@ loginRouter.route('/register')
     });
   })
 
-loginRouter.route('/')
+loginRouter.route('/login')
   .post((req, res, next) => {
     console.log(req.body)
     Users.findOne({email : req.body.email})
     .then((users) => {
-      console.log(req.body, users)
-      if(req.body.password===users.password){
-        const token = jwt.sign({ sub: users.id }, "huahuahua", { expiresIn: '7d' });
-        res.status = 200; //respon
-        res.setHeader('Content-type', 'application/json');
-        let result = {
-          "username" : users.username,
-          "jenis kelamin" : users.jenis_kelamin,
-          "token" : token
+        try{
+          if(req.body.password.localCompare(users.password)===0){
+            const token = jwt.sign({ sub: users.id }, "huahuahua", { expiresIn: '7d' });
+            res.status = 200; //respon
+            res.setHeader('Content-type', 'application/json');
+            let result = {
+              "username" : users.username,
+              "jenis kelamin" : users.jenis_kelamin,
+              "token" : token
+            }
+            res.json(result);
+          }
+          else{
+            res.status = 400; //respon
+            res.setHeader('Content-type', 'application/json');
+            res.end("Email atau password salah");
+          }
         }
-        res.json(result);
-      }
-      else{
-        res.status = 403; //respon
-        res.setHeader('Content-type', 'application/json');
-        res.end("Email atau password salah");
-      }
+        catch(e){
+          next(e)
+        }
+      })
     })
-  })
+
 
 module.exports = loginRouter 

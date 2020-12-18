@@ -13,8 +13,16 @@ var usersSchema = new Schema(
         type: Number,
   
     },
+    jenis_kelamin : {
+         type: String,
+    
+   },
     email : {
         type: String,
+
+   },
+    username : {
+       type: String,
   
     },
     alamat : {
@@ -23,13 +31,6 @@ var usersSchema = new Schema(
     
     },
     password : {
-    type: String,
-    
-  },jenis_kelamin : {
-    type: String,
-    
-  },
-  username : {
     type: String,
     
   }
