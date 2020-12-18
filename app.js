@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose')
 var dotenv = require('dotenv').config() //supaya .env nya bisa jalan
+var cors = require('cors')
 
 var UsersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
@@ -31,6 +32,7 @@ connect.then((db)=>{
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors()) // Use this after the variable declaration
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
