@@ -28,7 +28,7 @@ hospitalRouter.route('/data')
       try{
         res.status = 200;
         res.setHeader('Content-type', 'application/json');
-        res.send(hospital);
+        res.json(hospital);
       }
       catch (err) {
         res.status = 404;
@@ -38,11 +38,11 @@ hospitalRouter.route('/data')
   })
   .post((req, res, next)=>{
     hospitals.create(req.body)
-      .then((questionList)=>{
+      .then((hospital)=>{
       try{
         res.status = 200;
         res.setHeader('Content-type', 'application/json');
-        res.json(questionList);
+        res.json(hospital);
       }
       catch (err) {
         res.status = 500;
@@ -51,7 +51,7 @@ hospitalRouter.route('/data')
     })
   })
   .put((req, res, next) => {
-    hospitals.findOneAndUpdate({name: req.params.hospital_name}, {
+    hospitals.findOneAndUpdate({nama: req.params.hospital_name}, {
       $set: req.body 
     }, { new: true })
       .then((hospital) => {
