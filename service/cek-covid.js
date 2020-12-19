@@ -26,4 +26,15 @@ function cek_covid(data){
   else return cek_kondisi(data)
 };
 
-module.exports = cek_covid
+function cek_covid_asso(data){
+  console.log("masuk bigml")
+  var bigml = require('bigml');
+  var connection = new bigml.BigML('bluejaden99', '2eb0296ff89bdc9ca84e809412405db800f1654c')  
+  var localModel = new bigml.LocalModel('model/5fdd48492fb31c5604000ac0', connection);
+    localModel.predict({'petal length': 8, 'sepal-width' :  8},function(error, prediction) {console.log(prediction)}); 
+}
+
+module.exports = {
+  cek_covid,
+  cek_covid_asso
+}
