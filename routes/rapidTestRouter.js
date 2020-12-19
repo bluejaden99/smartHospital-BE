@@ -35,7 +35,7 @@ rapidTestRouter.route('/')
 
   .put((req, res, next) => {
     res.status = 403; //respon not supported
-    res.end('Not Supported by the time')
+    res.end('Something Happened')
 })
 
   .delete((req, res, next) => {
@@ -63,7 +63,7 @@ rapidTestRouter.route('/:rapidId')
         res.json(rapid); }
         else {
         res.status = 404;
-        res.end ('Something Happend');
+        res.end ('Something Happened');
         }
     });
 })
@@ -84,7 +84,7 @@ rapidTestRouter.route('/:rapidId')
       res.json(rapid); }
       else {
       res.status = 404;
-      res.end ('Something Happend');
+      res.end ('Something Happened');
       }
     });
 })
@@ -98,7 +98,7 @@ rapidTestRouter.route('/:rapidId')
         res.end ('Remove Success'); }
         else {
         res.status = 404;
-        res.end ('Something Happend');
+        res.end ('Something Happened');
         }
     });
 });
