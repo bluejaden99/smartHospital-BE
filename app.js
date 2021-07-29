@@ -12,7 +12,7 @@ var UsersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var rapidTestRouter = require ('./routes/rapidTestRouter');
 var usersRouter = require('./routes/users');
-var newsRouter = require('./routes/newsRouter');
+// var newsRouter = require('./routes/newsRouter');
 var questionRouter = require('./routes/questionRouter');
 var hospitalsRouter = require('./routes/hospitalsRouter');
 var docRouter = require('./routes/docRouter');
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/rapidtest', rapidTestRouter);
 app.use('/users', usersRouter);
-app.use('/news', newsRouter);
+// app.use('/news', newsRouter);
 app.use('/question', questionRouter);
 app.use('/hospital', hospitalsRouter);
 app.use('/users', UsersRouter);
