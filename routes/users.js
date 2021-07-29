@@ -18,10 +18,15 @@ UsersRouter.route('/')
     .get((req, res, next) => {
         Users.find({})
         .then((users) => {
+            try{
             res.status = 200; //respon
             res.setHeader('Content-type', 'application/json');
             res.json(users);
-        });
+            }
+            catch (err) {
+            res.status = 500;
+            next(err); }
+            });
     })
     //CREATE User
     .post((req, res, next) => {
