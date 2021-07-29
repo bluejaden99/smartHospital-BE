@@ -25,11 +25,13 @@ var app = express();
 var url = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-shard-00-00.at7di.mongodb.net:27017,cluster0-shard-00-01.at7di.mongodb.net:27017,cluster0-shard-00-02.at7di.mongodb.net:27017/${process.env.MONGO_DATABASE}?ssl=true&replicaSet=atlas-s9m4yi-shard-0&authSource=admin&retryWrites=true&w=majority`;
 var connect = mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
 
-connect.then((db)=>{
-  console.log('Success');
-}, (err)=>{
-  console.log(err);
+connect.then(() => {
+  console.log('start');
 })
+.catch(err => {
+  console.error('App starting error:', err.stack);
+  process.exit(1)
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
