@@ -12,7 +12,7 @@ var UsersRouter = require('./routes/users');
 var loginRouter = require('./routes/login');
 var rapidTestRouter = require ('./routes/rapidTestRouter');
 var usersRouter = require('./routes/users');
-// var newsRouter = require('./routes/newsRouter');
+var newsRouter = require('./routes/newsRouter');
 var questionRouter = require('./routes/questionRouter');
 var hospitalsRouter = require('./routes/hospitalsRouter');
 var docRouter = require('./routes/docRouter');
@@ -25,7 +25,7 @@ var app = express();
 var url = `mongodb://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-shard-00-00.at7di.mongodb.net:27017,cluster0-shard-00-01.at7di.mongodb.net:27017,cluster0-shard-00-02.at7di.mongodb.net:27017/${process.env.MONGO_DATABASE}?ssl=true&replicaSet=atlas-s9m4yi-shard-0&authSource=admin&retryWrites=true&w=majority`;
 var connect = mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false });
 
-connect.then(async (db)=>{
+connect.then((db)=>{
   console.log('Success');
 }, (err)=>{
   console.log(err);
@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/rapidtest', rapidTestRouter);
 app.use('/users', usersRouter);
-// app.use('/news', newsRouter);
+app.use('/news', newsRouter);
 app.use('/question', questionRouter);
 app.use('/hospital', hospitalsRouter);
 app.use('/users', UsersRouter);
